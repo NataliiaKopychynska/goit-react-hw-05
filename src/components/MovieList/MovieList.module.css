@@ -1,0 +1,17 @@
+.card {
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.tittleMovie {
+  font-size: 16px;
+  margin: 10px 0 0 0;
+}
