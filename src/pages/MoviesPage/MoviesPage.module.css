@@ -1,0 +1,45 @@
+.contentContainer {
+  margin-top: 40px;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.inputForm {
+  width: 400px;
+  color: rgb(255, 255, 255);
+  background: linear-gradient(rgba(1, 1, 1, 0), #334af8b1);
+  border-top: none;
+  border-bottom: 1px solid #334bf8;
+  border-right: 1px solid #334bf8;
+  border-left: 1px solid #334bf8;
+  border-radius: 12px;
+  padding: 10px;
+  padding-left: 16px;
+
+  &::placeholder {
+    color: rgb(255, 255, 255);
+    letter-spacing: 0.08em;
+    font-weight: 300;
+    font-size: 14px;
+  }
+}
+.noFound {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+}

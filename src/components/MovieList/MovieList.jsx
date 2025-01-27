@@ -5,14 +5,14 @@ const MovieList = ({ movie }) => {
   return (
     <div
       //   key={movie.id}
-      style={s.card}
+      className={s.card}
     >
       <img
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
-        style={s.img}
+        className={s.img}
       />
-      <h3 style={s.tittleMovie}>{movie.title}</h3>
+      <h3 className={s.tittleMovie}>{movie.title}</h3>
       <NavLink to="movieId">Details</NavLink>
     </div>
   );

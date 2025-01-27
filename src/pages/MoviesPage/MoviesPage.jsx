@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react";
-import fetchMovies from "../../service/api";
+// import { useEffect, useState } from "react";
+// import fetchMovies from "../../service/api";
+// import MovieList from "../../components/MovieList/MovieList";
+// import { Form, Formik } from "formik";
+
+import { useState } from "react";
+import { searchMoviesForPrompt } from "../../service/api";
 import MovieList from "../../components/MovieList/MovieList";
-import { Form, Formik } from "formik";
+import s from "./MoviesPage.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
 // function MoviesPage() {
 //   const [moviesList, setMoviesList] = useState(null);
@@ -36,43 +42,59 @@ import { Form, Formik } from "formik";
 // export default MoviesPage;
 
 const MoviesPage = () => {
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchMovies()
-      .then((data) => {
-        if (data && data.results) {
-          setMovies(data.results); // Перевіряємо, чи є `results`
-        } else {
-          setMovies([]); // Якщо `data.results` не існує, встановлюємо порожній масив
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching movies:", error);
-        setMovies([]); // У разі помилки також встановлюємо порожній масив
-      })
-      .finally(() => {
-        setLoading(false);
+  const handleChange = (e) => {
+    e.preventDefault();
+    setQuery(e.target.value);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (query.trim() === "") {
+      toast("Please, enter your prompt!", {
+        icon: "👏",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
       });
-  }, []);
+      return;
+    }
+    //через inputValue робимо feth запит на пошук фільму
+    try {
+      const data = await searchMoviesForPrompt(query);
+      setLoading(true);
+      setMovies(data.results);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div>
-      <Formik>
-        <Form></Form>
-      </Formik>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-          {movies.length > 0 ? (
-            movies.map((movie) => <MovieList key={movie.id} movie={movie} />)
-          ) : (
-            <p>No movies found.</p>
-          )}
-        </div>
-      )}
+    <div className={s.contentContainer}>
+      <Toaster />
+      <form onSubmit={handleSubmit}>
+        <input
+          className={s.inputForm}
+          type="text"
+          placeholder="Search movies..."
+          value={query}
+          onChange={handleChange}
+        />
+      </form>
+      {loading && <p>Loading...</p>}
+      <div className={s.cardGrid}>
+        {movies.length > 0 ? (
+          movies.map((movie) => <MovieList key={movie.id} movie={movie} />)
+        ) : (
+          <p className={s.noFound}>No movies found.</p>
+        )}
+      </div>
     </div>
   );
 };

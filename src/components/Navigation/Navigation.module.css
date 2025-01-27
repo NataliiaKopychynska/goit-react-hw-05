@@ -1,7 +1,34 @@
+.header {
+  height: 64px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* padding: 2rem; */
+  padding: 0;
+  text-align: center;
+  background-color: rgb(29, 29, 29);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset;
+}
+
+.header .navInformation {
+  display: flex;
+  gap: 24px;
+}
+
 .link {
-  color: black;
+  /* color: black; */
+  color: #ecf4ff;
+  /* background-color: #334bf8; */
+  border-bottom: 1px solid #5274ff;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  border-radius: 16px;
   text-decoration: none;
 }
 .active {
-  color: blueviolet;
+  color: #5274ff;
 }
