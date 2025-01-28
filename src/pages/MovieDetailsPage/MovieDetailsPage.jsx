@@ -16,15 +16,12 @@ const MovieDetailsPage = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const { movie } = location.state || {}; // Отримуємо переданий стан
 
-  const firstFocusRef = useRef(); // Використовуємо useRef для фокусу
+  // Використання useRef для збереження стану навігації
+  const navigationStateRef = useRef(location.state);
 
-  useEffect(() => {
-    if (firstFocusRef.current) {
-      firstFocusRef.current.focus(); // Встановлюємо фокус на перший елемент
-    }
-  }, []);
+  // Отримуємо переданий стан із useRef
+  const { movie } = navigationStateRef.current || {};
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -37,7 +34,7 @@ const MovieDetailsPage = () => {
         const data = await detailsMovie(movieId);
         setMovieDetails(data);
       } catch (error) {
-        console.error("Error fetching movies details:", error);
+        console.error("Error fetching movie details:", error);
       } finally {
         setLoading(false);
       }
@@ -46,17 +43,11 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   const handleGoBack = () => {
-    const previousPage = document.referrer;
-    if (previousPage) {
-      navigate(-1);
-    } else {
-      navigate("/movies");
-    }
+    // Повернення до попередньої сторінки
+    navigate(navigationStateRef.current?.from || "/movies");
   };
 
-  const buildLinkClass = ({ isActive }) => {
-    return clsx(s.link, isActive && s.active);
-  };
+  const buildLinkClass = ({ isActive }) => clsx(s.link, isActive && s.active);
 
   if (!movie && !movieDetails) {
     return <p>No movie data available</p>;
@@ -65,14 +56,7 @@ const MovieDetailsPage = () => {
   return (
     <>
       <div className={s.detilesMovie}>
-        {/* <NavLink className={s.backLink} to="/">
-          Go back
-        </NavLink> */}
-        <button
-          onClick={handleGoBack}
-          className={s.backLink}
-          ref={firstFocusRef}
-        >
+        <button onClick={handleGoBack} className={s.backLink}>
           Go back
         </button>
         {movieDetails && (
