@@ -6,14 +6,16 @@
   gap: 24px;
   max-width: 1200px; */
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 24px;
 }
 
 .castContain {
+  width: 120px;
   border-bottom: 1px solid #334bf8;
   border-radius: 12px;
   background: linear-gradient(rgb(39, 39, 39), #292929b1);
+  margin-bottom: 64px;
   /* width: 0px; */
 }
 .img {
@@ -27,7 +29,7 @@
 }
 
 .nameAchter {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.04em;
   margin-top: 12px;
