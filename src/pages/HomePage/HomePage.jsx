@@ -44,7 +44,7 @@ const HomePage = () => {
           )}
         </div>
       )}
-      {isError && <p>Something went wrong. Please try again later.</p>}
+      {isError && <p>error</p>}
     </div>
   );
 };

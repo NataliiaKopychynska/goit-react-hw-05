@@ -1,3 +1,5 @@
+// import { Field, Form, Formik } from "formik";
+
 import { lazy, useEffect, useState } from "react";
 import { fetchMovies, searchMoviesForPrompt } from "../../service/api";
 // import MovieList from "../../components/MovieList/MovieList";
@@ -6,38 +8,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const MovieList = lazy(() => import("../../components/MovieList/MovieList"));
-
-// function MoviesPage() {
-//   const [moviesList, setMoviesList] = useState(null);
-
-//   useEffect(() => {
-//     const getData = async () => {
-//       try {
-//         const data = await fetchMovies();
-//         setMoviesList(data.results); // Якщо потрібен список фільмів
-//       } catch (error) {
-//         console.error("Error fetching movies:", error);
-//       }
-//     };
-//     getData();
-//   }, []);
-//   return (
-//     <>
-//       {/* {JSON.stringify(moviesList, null, 2)} */}
-//       {moviesList.map((movie) => (
-//         <div key={movie.id}>
-//           <h2>{movie.title}</h2>
-//           <p>{movie.overview}</p>
-//           <img
-//             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-//             alt={movie.title} />
-//           <NavLink to="movieId">Details</NavLink>
-//         </div>
-//       ))}
-//     </>
-//   );
-// }
-// export default MoviesPage;
 
 const MoviesPage = () => {
   const [query, setQuery] = useState("");

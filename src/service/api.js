@@ -40,9 +40,6 @@ export const optionsTrendMovies = {
     accept: "application/json",
     Authorization: API_KEY,
   },
-  params: {
-    page: 1, // Можна додати інші параметри, якщо необхідно
-  },
 };
 export const fetchMovies = async () => {
   const response = await axios.get(API_URL_TrendM, optionsTrendMovies);
