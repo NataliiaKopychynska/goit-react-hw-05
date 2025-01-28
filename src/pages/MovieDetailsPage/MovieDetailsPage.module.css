@@ -1,0 +1,91 @@
+.addInformBtn {
+  margin-top: 32px;
+  display: flex;
+  gap: 32px;
+  width: 100vh;
+  border-top: 1px solid #313131;
+  padding: 16px;
+  padding-top: 4px;
+  position: relative;
+}
+
+.link {
+  color: aliceblue;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.active {
+  color: #535bf2;
+  border-bottom: 2px solid #535bf2;
+  /* border-end-start-radius: 12px; */
+}
+.detilesMovie {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.backLink {
+  background-color: #2f2f2f;
+  border-bottom: 1px solid #535bf2;
+  border-radius: 12px;
+  padding: 8px 12px;
+  width: 104px;
+  color: aliceblue;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+.firstInfContainer {
+  margin-top: 24px;
+  display: flex;
+  gap: 32px;
+  width: 100vh;
+}
+.poster {
+  border-radius: 16px;
+  width: 360px;
+}
+.nameM {
+  font-size: 28px;
+  font-weight: 400;
+  text-align: start;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+}
+.titleM {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  text-align: start;
+}
+
+/* .CastBtn {
+  color: aliceblue;
+  letter-spacing: 0.04em;
+  padding: 12px;
+
+  &:focus,
+  &.active {
+    color: aliceblue;
+    border-bottom: 2px solid #535bf2;
+    border-end-start-radius: 12px;
+  }
+}
+
+.revivesBtn {
+  color: aliceblue;
+  letter-spacing: 0.04em;
+  padding: 12px;
+
+  &:focus,
+  &.active {
+    color: aliceblue;
+    border-bottom: 2px solid #535bf2;
+    border-bottom-right-radius: 12px;
+  }
+} */

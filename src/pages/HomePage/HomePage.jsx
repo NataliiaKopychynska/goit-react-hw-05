@@ -6,25 +6,27 @@ import s from "./HomePage.module.css";
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     fetchMovies()
       .then((data) => {
         if (data && data.results) {
-          setMovies(data.results); // Перевіряємо, чи є `results`
+          setMovies(data.results);
         } else {
-          setMovies([]); // Якщо `data.results` не існує, встановлюємо порожній масив
+          setMovies([]);
         }
       })
       .catch((error) => {
+        setIsError(true);
         console.error("Error fetching movies:", error);
-        setMovies([]); // У разі помилки також встановлюємо порожній масив
+        setMovies([]);
       })
       .finally(() => {
         setLoading(false);
       });
   }, []);
-
+  console.log(movies);
   return (
     <div>
       {/* <Formik>
@@ -42,6 +44,7 @@ const HomePage = () => {
           )}
         </div>
       )}
+      {isError && <p>Something went wrong. Please try again later.</p>}
     </div>
   );
 };

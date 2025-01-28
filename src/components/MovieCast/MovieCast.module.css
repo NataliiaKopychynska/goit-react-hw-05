@@ -1,0 +1,35 @@
+.content {
+  position: absolute;
+  top: 80px;
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-width: 1200px; */
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+}
+
+.castContain {
+  border-bottom: 1px solid #334bf8;
+  border-radius: 12px;
+  background: linear-gradient(rgb(39, 39, 39), #292929b1);
+  /* width: 0px; */
+}
+.img {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+  /* border-radius: 12px; */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.nameAchter {
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  /* width: ; */
+}

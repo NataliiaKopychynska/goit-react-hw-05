@@ -13,7 +13,9 @@ const MovieList = ({ movie }) => {
         className={s.img}
       />
       <h3 className={s.tittleMovie}>{movie.title}</h3>
-      <NavLink to="movieId">Details</NavLink>
+      <NavLink to={`/movie/${movie.id}`} id={movie.id}>
+        Details
+      </NavLink>
     </div>
   );
 };
