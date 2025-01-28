@@ -1,8 +1,3 @@
-// import { useEffect, useState } from "react";
-// import fetchMovies from "../../service/api";
-// import MovieList from "../../components/MovieList/MovieList";
-// import { Form, Formik } from "formik";
-
 import { lazy, useEffect, useState } from "react";
 import { fetchMovies, searchMoviesForPrompt } from "../../service/api";
 // import MovieList from "../../components/MovieList/MovieList";
@@ -51,16 +46,6 @@ const MoviesPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const queryParams = new URLSearchParams(location.search);
-  // const queryFromUrl = queryParams.get("query");
-
-  // useEffect(() => {
-  //   const queryParams = new URLSearchParams(location.search);
-  //   const queryFromUrl = queryParams.get("query");
-  //   if (queryFromUrl) {
-  //     setQuery(queryFromUrl);
-  //   }
-  // }, [location.search]);
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const queryFromUrl = queryParams.get("query");
@@ -88,29 +73,12 @@ const MoviesPage = () => {
       return;
     }
 
-    // if (query.trim()) {
-    //   navigate(`?query=${query}`);
-    // } else {
-    //   navigate("/"); // Якщо query порожнє, очищуємо URL від параметра
-    // }
-
-    // //через inputValue робимо feth запит на пошук фільму
-    // try {
-    //   const data = await searchMoviesForPrompt(query);
-    //   setLoading(true);
-    //   setMovies(data.results);
-    // } catch (error) {
-    //   console.error("Error fetching movies:", error);
-    // } finally {
-    //   setLoading(false);
-    // }
     if (query.trim()) {
       navigate(`?query=${query}`);
     } else {
-      navigate("/"); // Якщо query порожнє, очищуємо URL від параметра
+      navigate("/");
     }
 
-    // Фетчимо фільми за запитом
     try {
       setLoading(true);
       const data = await searchMoviesForPrompt(query);
@@ -128,28 +96,6 @@ const MoviesPage = () => {
     }
   }, [query]);
 
-  // return (
-  //   <div className={s.contentContainer}>
-  //     <Toaster />
-  //     <form onSubmit={handleSubmit}>
-  //       <input
-  //         className={s.inputForm}
-  //         type="text"
-  //         placeholder="Search movies..."
-  //         value={query}
-  //         onChange={handleChange}
-  //       />
-  //     </form>
-  //     {loading && <p>Loading...</p>}
-  //     <div className={s.cardGrid}>
-  //       {movies.length > 0 ? (
-  //         movies.map((movie) => <MovieList key={movie.id} movie={movie} />)
-  //       ) : (
-  //         <p className={s.noFound}>No movies found.</p>
-  //       )}
-  //     </div>
-  //   </div>
-  // );
   return (
     <div className={s.contentContainer}>
       <Toaster />

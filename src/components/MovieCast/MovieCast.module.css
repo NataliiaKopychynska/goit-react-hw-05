@@ -20,6 +20,7 @@
   height: auto;
   width: 100%;
   object-fit: cover;
+  background-color: #ccc;
   /* border-radius: 12px; */
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;

@@ -38,7 +38,11 @@ const MovieCast = () => {
           <div className={s.castContain} key={cast.id}>
             <img
               className={s.img}
-              src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+              src={
+                cast.profile_path
+                  ? `https://image.tmdb.org/t/p/w500${cast.profile_path}`
+                  : "https://png.pngtree.com/png-clipart/20220621/original/pngtree-default-placeholder-businessman-half-length-portr-png-image_8168507.png"
+              }
               alt={cast.name}
             />
             <h3 className={s.nameAchter}>{cast.name}</h3>

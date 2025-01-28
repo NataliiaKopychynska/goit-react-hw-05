@@ -11,7 +11,8 @@ const MovieDetailsPage = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    if (document.referrer) {
+    const previousPage = document.referrer;
+    if (previousPage) {
       navigate(-1);
     } else {
       navigate("/movies");
