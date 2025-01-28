@@ -1,5 +1,12 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
 .card {
-  width: 200px;
+  width: 280px;
   border-bottom: 1px solid #334bf8;
   border-right: 1px solid #334bf8;
   border-left: 1px solid #334bf8;
@@ -16,6 +23,10 @@
 }
 
 .tittleMovie {
+  color: aliceblue;
+  font-weight: 400;
+
+  letter-spacing: 0.04em;
   font-size: 16px;
   margin: 10px 0 0 0;
 }

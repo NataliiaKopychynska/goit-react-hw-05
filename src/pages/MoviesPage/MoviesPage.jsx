@@ -1,11 +1,8 @@
-// import { Field, Form, Formik } from "formik";
-
 import { lazy, useEffect, useState } from "react";
-import { fetchMovies, searchMoviesForPrompt } from "../../service/api";
-// import MovieList from "../../components/MovieList/MovieList";
+import { searchMoviesForPrompt } from "../../service/api";
 import s from "./MoviesPage.module.css";
 import toast, { Toaster } from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const MovieList = lazy(() => import("../../components/MovieList/MovieList"));
 
@@ -14,25 +11,37 @@ const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const [searchParams] = useSearchParams(); // Використовуємо useSearchParams для доступу до параметрів запиту
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const queryFromUrl = queryParams.get("query");
-    if (queryFromUrl) {
-      setQuery(queryFromUrl);
+  // Функція для отримання фільмів на основі запиту
+  const fetchMoviesAndSetState = async (query) => {
+    try {
+      setLoading(true);
+      const data = await searchMoviesForPrompt(query);
+      console.log("Fetched movies:", data); // Debug
+      setMovies(data.results);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+      setMovies([]);
+    } finally {
+      setLoading(false);
     }
-  }, [location.search]);
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    setQuery(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  // Викликається при змінах у параметрах пошуку або коли користувач вводить новий запит
+  useEffect(() => {
+    const queryFromUrl = searchParams.get("query");
+    if (queryFromUrl) {
+      setQuery(queryFromUrl);
+      fetchMoviesAndSetState(queryFromUrl); // Оновлюємо фільми при зміні параметрів
+    }
+  }, [searchParams]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+
     if (query.trim() === "") {
-      toast("Please, enter your prompt!", {
+      toast("Please, enter your search query!", {
         icon: "👏",
         style: {
           borderRadius: "10px",
@@ -43,49 +52,34 @@ const MoviesPage = () => {
       return;
     }
 
-    if (query.trim()) {
-      navigate(`?query=${query}`);
-    } else {
-      navigate("/");
-    }
-
-    try {
-      setLoading(true);
-      const data = await searchMoviesForPrompt(query);
-      setMovies(data.results);
-    } catch (error) {
-      console.error("Error fetching movies:", error);
-    } finally {
-      setLoading(false);
-    }
+    // Оновлюємо URL з новим запитом
+    navigate(`?query=${query}`);
   };
-
-  useEffect(() => {
-    if (query) {
-      fetchMovies(query);
-    }
-  }, [query]);
 
   return (
     <div className={s.contentContainer}>
       <Toaster />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={s.searchForm}>
         <input
           className={s.inputForm}
           type="text"
           placeholder="Search movies..."
           value={query}
-          onChange={handleChange}
+          onChange={(e) => setQuery(e.target.value)} // Оновлення стану query при введенні
         />
+        <button type="submit" className={s.submitButton}>
+          Search
+        </button>
       </form>
       {loading && <p>Loading...</p>}
-      <div className={s.cardGrid}>
-        {movies.length > 0 ? (
-          movies.map((movie) => <MovieList key={movie.id} movie={movie} />)
-        ) : (
-          <p className={s.noFound}>No movies found.</p>
-        )}
-      </div>
+      {!loading && movies.length > 0 && (
+        <div className={s.cardGrid}>
+          <MovieList movies={movies} />
+        </div>
+      )}
+      {!loading && movies.length === 0 && (
+        <p className={s.noFound}>No movies found.</p>
+      )}
     </div>
   );
 };

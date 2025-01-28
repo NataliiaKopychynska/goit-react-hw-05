@@ -29,22 +29,20 @@ const HomePage = () => {
   console.log(movies);
   return (
     <div>
-      {/* <Formik>
-        <Form></Form>
-      </Formik> */}
       <h2 className={s.title}>Trending today</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <div className={s.cardGrid}>
           {movies.length > 0 ? (
-            movies.map((movie) => <MovieList key={movie.id} movie={movie} />)
+            // передаємо масив movies як пропс до MovieList
+            <MovieList movies={movies} />
           ) : (
             <p>No movies found.</p>
           )}
         </div>
       )}
-      {isError && <p>error</p>}
+      {isError && <p>Error fetching data.</p>}
     </div>
   );
 };

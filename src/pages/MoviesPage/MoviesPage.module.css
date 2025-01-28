@@ -6,11 +6,29 @@
   font-size: 20px;
 }
 
-.cardGrid {
+/* .cardGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin-top: 24px;
+} */
+
+.submitButton {
+  border: none;
+  background-color: #2f2f2f;
+  border-bottom: 1px solid #535bf2;
+  border-right: 1px solid #334bf8;
+  border-left: 1px solid #334bf8;
+  background: linear-gradient(rgba(1, 1, 1, 0), #334af8b1);
+  /* border-radius: 12px; */
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 8px 12px;
+  width: 104px;
+  color: aliceblue;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
 }
 
 .inputForm {
@@ -21,7 +39,9 @@
   border-bottom: 1px solid #334bf8;
   border-right: 1px solid #334bf8;
   border-left: 1px solid #334bf8;
-  border-radius: 12px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  /* border-radius: 12px; */
   padding: 10px;
   padding-left: 16px;
 
